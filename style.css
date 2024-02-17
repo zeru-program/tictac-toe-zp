@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        user-select: none;
+      }
+      .box-tictac {
+        width: 100px;
+        height: 100px;
+      }
+      .xy-player {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 4em;
+        width: 100%;
+        height: 100%;
+        color: white;
+        transition: all .4s ease;
+        animation: scalePopupIn .4s ease;
+      }
+      .containerTictac {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        width: 80%;
+        height: auto;
+      }
+      /*
+      
+      #tab1, #tab2, #tab3, #tab4, #tab5, #tab6, #tab7, #tab8, #tab9 {
+        transform: scale(1);
+        transition: all .4s ease;
+      } */
+      @keyframes scalePopupIn {
+  from {
+  transform: scale(.4);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+      @keyframes scalePopupOut {
+  from {
+    transform: scale(1);
+  }
+  to {
+  transform: scale(.2);
+  }
+}
+#switchPlayers {
+  position: fixed;
+  bottom: 2%;
+}
+.popup-winner {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: "Outfit", Sans-Serif;
+  width: 300px;
+  height: 350px;
+  font-size: 2.5em;
+  animation: scalePopupIn .8s ease;
+}
+.popupWelcome, .popupNamePerson {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  font-family: "Outfit", Sans-Serif;
+  width: 300px;
+  height: 350px;
+  animation: scalePopupIn .8s ease;
+  margin: 0;
+  padding: 0;
+  gap: 0;
+}
+.popupNamePerson {
+  width: 350px;
+  height: 400px;
+}
+.title-popup {
+  font-size: 3em;
+  margin: 0;
+  padding: 0;
+}
+.subtitle-popup {
+  font-size: .7em;
+  color: #c1c1c1;
+  margin: 0;
+  padding: 0;
+}
+.btn-select-mode:hover {
+  border: none;
+  transform: scale(.9);
+}
+.btn-select-mode {
+  border: none;
+  border-radius: 5px;
+  padding: 10px 50px;
+  margin: 10px;
+  transition: all .5s ease;
+}
+.satuVsSatu {
+  background: #f0d223;
+}
+.satuVsAi {
+  background: #e3872b;
+}
+.con-input-name1, .con-input-name2 {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-direction: column;
+  position: relative;
+  margin: 15px;
+  margin-top: 20px;
+  padding: 0;
+}
+.label-name1, .label-name2 {
+  position: absolute;
+  top: -15px;
+  left: 0;
+  font-size: .7em;
+  color: #fff;
+}
+.input-name {
+  padding: 5px;
+  border: none;
+  border-radius: 3px;
+}
+.con-player-skor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: auto;
+}

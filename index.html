@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tictac Toe 2 players</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
+</head>
+<body class="bg-dark">
+  <!-- nama player dan skor nya -->
+  <div class="con-player-skor">
+    <div class="player1">
+      <label class=""></label>
+    </div>
+  </div>
+  
+   <div class="containerTictac">
+     <div class="box-tictac border border-2 border-primary" onclick="getTouchPlayers()" id="tab1"></div>
+     <div class="box-tictac border border-2 border-primary" onclick="getTouchPlayers()" id="tab2"></div>
+     <div class="box-tictac border border-2 border-primary" onclick="getTouchPlayers()" id="tab3"></div>
+     <div class="box-tictac border border-2 border-primary" onclick="getTouchPlayers()" id="tab4"></div>
+     <div class="box-tictac border border-2 border-primary" onclick="getTouchPlayers()" id="tab5"></div>
+     <div class="box-tictac border border-2 border-primary" onclick="getTouchPlayers()" id="tab6"></div>
+     <div class="box-tictac border border-2 border-primary" onclick="getTouchPlayers()" id="tab7"></div>
+     <div class="box-tictac border border-2 border-primary" onclick="getTouchPlayers()" id="tab8"></div>
+     <div class="box-tictac border border-2 border-primary" onclick="getTouchPlayers()" id="tab9"></div>
+   </div>
+     
+     <div id="switchPlayers">
+       
+     </div>
+     
+     
+     <!-- popup win -->
+     <div class="popup-winner bg-light position-fixed rounded rounded-2 font-weight-bold">
+     </div>
+     
+     <!--  popup welcome and select mode game  -->
+     <div class="popupWelcome bg-primary text-light rounded-2 rounded position-fixed">
+       <label class="title-popup text-light font-weight-bold">Welcome!</label>
+       <label class="subtitle-popup font-weight-bold">please select your gamemode.</label>
+       <button class="btn-select-mode satuVsSatu" onclick="pVsp()">1 vs 1</button>
+       <button class="btn-select-mode satuVsAi" onclick="pVsai()">1 vs AI</button>
+     </div>
+     
+     <div class="popupNamePerson bg-primary text-light rounded-2 rounded position-fixed">
+       <label class="title-popup text-light font-weight-bold">Input your name</label>
+       <div class="con-input-name1">
+         <label class="label-name1">Player 1</label>
+         <input type="text" class="input-name" id="player1Name" />
+       </div>
+       <div class="con-input-name2">
+         <label class="label-name2">Player 2</label>
+         <input type="text" class="input-name" id="player2Name" />
+       </div>
+       <button class="btn-select-mode satuVsAi text-light font-weight-bold text-uppercase" onclick="startPVP()">Start</button>
+     </div>
+     
+     
+    <!--
+    <div id="playerTurn">Player 1's turn</div>
+    <button id="playerButton" onclick="playerClick()">Click me!</button>
+    <div id="outputText"></div>
+    -->
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const popupW = document.querySelector(".popupWelcome");
+      popupW.style.display = "flex"
+      setTimeout(function () {
+      popupW.style.animation = "none";
+      }, 1000);
+    })
+    
+   const jsConfetti = new JSConfetti();
+    const boxTictacAll = document.querySelectorAll(".box-tictac");
+    const playerInfo = document.getElementById('switchPlayers');
+    const winPlayerText = document.querySelector('.popup-winner');
+      const popupW = document.querySelector(".popupWelcome");
+      const popupNamePlayer = document.querySelector(".popupNamePerson");
+      
+    //tab selec
+     const tab1 = document.getElementById('tab1');
+     const tab2 = document.getElementById('tab2');
+     const tab3 = document.getElementById('tab3');
+     const tab4 = document.getElementById('tab4');
+     const tab5 = document.getElementById('tab5');
+     const tab6 = document.getElementById('tab6');
+     const tab7 = document.getElementById('tab7');
+     const tab8 = document.getElementById('tab8');
+     const tab9 = document.getElementById('tab9');
+     let player = 1;
+
+// sistem select mode and run mode
+// select
+function pVsp() { // 1 vs 1 
+   popupW.style.animation = "scalePopupOut .8s ease";
+   setTimeout(function () {
+     popupW.style.display = "none";
+     popupNamePlayer.style.display = "flex";
+   }, 700);
+}
+function pVsai() { // 1 vs Ai 
+   popupW.style.animation = "scalePopupOut 1s ease";
+   setTimeout(function () {
+     popupW.style.display = "none";
+     startAi();
+   }, 900);
+}
+
+// run mode with start function
+
+
+function startPVP() {
+   popupNamePlayer.style.animation = "scalePopupOut .8s ease";
+   setTimeout(function () {
+     popupNamePlayer.style.display = "none";
+    playerInfo.innerHTML = '<div class="info-player shadow p-2 font-weight-bold rounded rounded-2 bg-primary text-white" style="box-shadow: 0 0 5px solid black;">Player 1</div>';
+   }, 700);
+}
+function startAi() {
+  
+}
+
+// sistem players
+function getTouchPlayers() {
+  boxTictacAll.forEach(bxt => {
+    bxt.onclick = function () {
+      if (!bxt.querySelector('p')) {
+      if (player === 1) {
+        bxt.innerHTML = '<p class="xy-player">X</p>';
+        playerInfo.innerHTML = '<div class="info-player shadow p-2 font-weight-bold rounded rounded-2 bg-warning text-white" style="box-shadow: 0 0 5px solid black;">Player 2</div>';
+      } else {
+        bxt.innerHTML = '<p class="xy-player">O</p>';
+        playerInfo.innerHTML = '<div class="info-player shadow p-2 font-weight-bold rounded rounded-2 bg-primary text-white" style="box-shadow: 0 0 5px solid black;">Player 1</div>';
+      }
+      player = (player === 1) ? 2 : 1;
+      cekWiner();
+      checkAndReset();
+    } else {
+      console.log('full!');
+    }
+    }
+  });
+}
+getTouchPlayers();
+function checkAndReset() {
+  const allFilled = Array.from(boxTictacAll).every(bxt => bxt.querySelector('p'));
+  
+  if (allFilled) {
+    resetBoard();
+  }
+}
+
+function resetBoard() {
+  const xyPs = document.querySelectorAll('.xy-player');
+  
+  xyPs.forEach(xy => {
+    xy.style.animation = "scalePopupOut .8s ease";
+    
+    setTimeout(function () {
+      xy.style.animation = "none";
+      boxTictacAll.forEach(bx => {
+        bx.innerHTML = "";
+      });
+    }, 700);
+  });
+}
+// sistem check winner
+/*
+function cekWiner() {
+  if (tab1.innerText === "X") {
+    console.log("Winner!");
+    return;
+  } else {
+    console.log("Defeat");
+    
+  }
+} */
+ function cekWiner() {
+  const t1 = tab1.innerText; 
+  const t2 = tab2.innerText; 
+  const t3 = tab3.innerText; 
+  
+  const t4 = tab4.innerText; 
+  const t5 = tab5.innerText; 
+  const t6 = tab6.innerText; 
+  
+  const t7 = tab7.innerText; 
+  const t8 = tab8.innerText; 
+  const t9 = tab9.innerText; 
+  
+  // sistem win X
+  if (t1 === "X" && t2 === "X" && t3 === "X" || t4 === "X" && t5 === "X" && t6 === "X" || t7 === "X" && t8 === "X" && t9 === "X" || t1 === "X" && t4 === "X" && t7 === "X" || t2 === "X" && t5 === "X" && t8 === "X" || t3 === "X" && t6 === "X" && t9 === "X" || t1 === "X" && t5 === "X" && t9 === "X" || t3 === "X" && t5 === "X" && t7 === "X"  ) {
+    console.log("Player 1 Winner!");
+    winPlayerText.innerText = "Player 1 Win!";
+    winPlayerText.style.display = "flex";
+    jsConfetti.addConfetti({
+  confettiRadius: 3,
+  confettiNumber: 180,
+});
+    setTimeout(function () {
+      boxTictacAll.forEach(bxx => {
+        bxx.innerHTML = "";
+      });
+    winPlayerText.style.display = "none";
+     }, 3000);
+  } else if (t1 === "O" && t2 === "O" && t3 === "O" || t4 === "O" && t5 === "O" && t6 === "O" || t7 === "O" && t8 === "O" && t9 === "O" || t1 === "O" && t4 === "O" && t7 === "O" || t2 === "O" && t5 === "O" && t8 === "O" || t3 === "O" && t6 === "O" && t9 === "O" || t1 === "O" && t5 === "O" && t9 === "O" || t3 === "O" && t5 === "O" && t7 === "O"  ) {
+    console.log("Player 2 Winner!");
+    winPlayerText.innerText = "Player 2 Win!";
+    winPlayerText.style.display = "flex";
+   jsConfetti.addConfetti({
+  confettiRadius: 3,
+  confettiNumber: 180,
+});
+setTimeout(function () {
+      boxTictacAll.forEach(bxxx => {
+        bxxx.innerHTML = "";
+      });
+    winPlayerText.style.display = "none";
+     }, 3000);
+  }
+}  
+getTouchPlayers();
+    
+    /* backupan script player
+        let currentPlayer = 1;
+
+        function playerClick() {
+            // Display the output text based on the current player
+            const outputDiv = document.getElementById("outputText");
+            if (currentPlayer === 1) {
+                outputDiv.innerText = "Text A for Player 1";
+            } else {
+                outputDiv.innerText = "Text B for Player 2";
+            }
+
+            // Switch to the next player
+            currentPlayer = (currentPlayer === 1) ? 2 : 1;
+
+            // Update the turn display
+            document.getElementById("playerTurn").innerText = "Player " + currentPlayer + "'s turn";
+        }
+        */
+    </script>
+
+</body>
+</html>
