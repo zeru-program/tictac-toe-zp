@@ -26,13 +26,13 @@ body {
 }
 
 .containerTictac {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  width: 80%;
-  height: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 kolom dengan lebar yang sama */
+  gap: 0; /* Jarak antar kotak */
+  width: 300px; /* Sesuaikan lebar container sesuai kebutuhan Anda */
+  margin: 0 auto; /* Tengahkan container */
 }
+
 
 /*
       
