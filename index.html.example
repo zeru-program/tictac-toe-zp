@@ -1,0 +1,24 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+  
+  <script>
+  window.onload = function () {
+  
+      window.location.href = "/home";
+      // change /home according to your folder directory
+      
+  }
+  </script>
+  
+  </body>
+</html>
+
+
